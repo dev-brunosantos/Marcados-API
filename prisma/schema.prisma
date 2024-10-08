@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cargos {
+  id Int @id @default(autoincrement())
+  cargo String
+
+  dt_criacao DateTime @default(now())
+  dt_atualizacao DateTime @default(now())
+
+  usuarios Usuarios[]
+}
+
+model Vozes {
+  id Int @id @default(autoincrement())
+  voz String
+
+  dt_criacao DateTime @default(now())
+  dt_atualizacao DateTime @default(now())
+}
+
+model Instrumentos {
+  id Int @id @default(autoincrement())
+  instrumento String
+
+  dt_criacao DateTime @default(now())
+  dt_atualizacao DateTime @default(now())
+}
+
+model Usuarios {
+  id String @id @default(uuid())
+  nome String 
+  email String @unique
+  senha String
+
+  dt_criacao DateTime @default(now())
+  dt_atualizacao DateTime @default(now())
+
+  // RELACIONAMENTOS
+  id_cargo Int
+  cargo Cargos @relation(fields: [id_cargo], references: [id])
+}

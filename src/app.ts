@@ -10,5 +10,6 @@ app.use(cors())
 app.use(routes.CargosRotas)
 app.use(routes.VozesRotas)
 app.use(routes.InstrumentosRotas)
+app.use(routes.UsuarioRotas)
 
 export { app }

@@ -19,8 +19,8 @@ model Cargos {
 
 model Vozes {
   id Int @id @default(autoincrement())
-  id_usuario String
-  usuario Usuarios @relation(fields: [id_usuario], references: [id])
+  // id_usuario String
+  // usuario Usuarios @relation(fields: [id_usuario], references: [id])
   voz String
 
   dt_criacao DateTime @default(now())
@@ -29,8 +29,8 @@ model Vozes {
 
 model Instrumentos {
   id Int @id @default(autoincrement())
-  id_usuario String
-  usuario Usuarios @relation(fields: [id_usuario], references: [id])
+  // id_usuario String
+  // usuario Usuarios @relation(fields: [id_usuario], references: [id])
   instrumento String
 
   dt_criacao DateTime @default(now())
@@ -49,6 +49,6 @@ model Usuarios {
   // RELACIONAMENTOS
   id_cargo Int
   cargo Cargos @relation(fields: [id_cargo], references: [id])
-  instrumento Instrumentos[]
-  vozes Vozes[]
+  // instrumento Instrumentos[]
+  // vozes Vozes[]
 }

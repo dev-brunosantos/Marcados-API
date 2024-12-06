@@ -6,7 +6,7 @@ const service = new NaipeServices()
 class Naipe {
     async Criar(req: Request, res: Response) {
         const { naipe } = req.body
-        const criar = await service.CriarNaipe(naipe)
+        const criar = await service.CriarNaipe({naipe})
         res.json(criar)
     }
     async ListarNaipes(req: Request, res: Response) {

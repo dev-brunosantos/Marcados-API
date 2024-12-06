@@ -1,0 +1,27 @@
+### POST
+POST http://localhost:9000/cargos
+Content-Type: application/json
+
+{
+    "cargo": "Teste"
+}
+
+### GET
+GET http://localhost:9000/cargos
+
+### GET
+GET http://localhost:9000/cargos/7
+
+### GET
+GET http://localhost:9000/cargos/cargo?cargo=musico
+
+### PATCH
+PATCH http://localhost:9000/cargos/7
+Content-Type: application/json
+
+{
+    "cargo": "Teste"
+}
+
+### DELETE
+DELETE http://localhost:9000/cargos/7

@@ -1,25 +1,21 @@
 import { Router } from "express";
-import { CargosControllers } from "../controllers/CargosControlles";
-import { VozesControllers } from "../controllers/VozesControllers";
-import { InstrumentosControllers } from "../controllers/InstrumentosControllers";
+import { CargosControllers } from "../controllers/Cargos.controller";
 
 const CargosRotas = Router()
-const VozesRotas = Router()
-const InstrumentosRotas = Router()
+
+const cargoHttp = "cargos"
 
 // ROTAS DE CARGOS
-CargosRotas.post('/cargos/criar', CargosControllers.CriarCargo)
-CargosRotas.get('/cargos', CargosControllers.ListarCargos)
-CargosRotas.get('/cargos/:cargo', CargosControllers.BuscarCargo)
+CargosRotas.post(`/${cargoHttp}`, CargosControllers.CriarCargo)
 
-// ROTAS DE NAIPES DE VOZES
-VozesRotas.post('/vozes/criar', VozesControllers.CriarNaipe)
-VozesRotas.get('/vozes', VozesControllers.Naipes)
-VozesRotas.get('/vozes/:cargo', VozesControllers.BuscarNaipe)
+CargosRotas.get(`/${cargoHttp}`, CargosControllers.ListarCargos)
 
-// ROTAS DE NAIPES DE INSTUMENTOS
-InstrumentosRotas.post('/instrumentos/criar', InstrumentosControllers.CriarCategoria)
-InstrumentosRotas.get('/instrumentos', InstrumentosControllers.ListarCategorias)
-InstrumentosRotas.get('/instrumentos/:cargo', InstrumentosControllers.BuscarInstrumentos)
+CargosRotas.get(`/${cargoHttp}/:id`, CargosControllers.BuscarCargoId)
 
-export { CargosRotas, VozesRotas, InstrumentosRotas }
+// CargosRotas.get(`/${cargoHttp}/:cargo`, CargosControllers.BuscarCargo)
+
+CargosRotas.patch(`/${cargoHttp}/:id`, CargosControllers.EditarCargo)
+
+CargosRotas.delete(`/${cargoHttp}/:id`, CargosControllers.ApagarCargo)
+
+export { CargosRotas }

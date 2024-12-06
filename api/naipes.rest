@@ -1,0 +1,26 @@
+### POST
+POST http://localhost:9000/naipes
+Content-Type: application/json
+
+{
+    
+}
+
+### GET
+GET http://localhost:9000/naipes
+
+### GET
+GET http://localhost:9000/naipes/1
+
+### GET
+GET http://localhost:9000/naipes/soprano
+
+### PATCH
+PATCH http://localhost:9000/naipes/1
+Content-Type: application/json
+{
+    
+}
+
+### DELETE
+DELETE http://localhost:9000/naipes/1

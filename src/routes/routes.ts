@@ -1,11 +1,7 @@
-import { CargosRotas, InstrumentosRotas, VozesRotas } from "./cargos.routes";
-import { UsuarioRotas } from "./usuario.routes";
+import { CargosRotas } from "./cargos.routes";
 
 const routes = {
-    CargosRotas,
-    VozesRotas,
-    InstrumentosRotas, 
-    UsuarioRotas
+    CargosRotas
 }
 
 export { routes }

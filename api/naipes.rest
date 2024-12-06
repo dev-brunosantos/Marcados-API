@@ -3,24 +3,25 @@ POST http://localhost:9000/naipes
 Content-Type: application/json
 
 {
-    
+    "naipe": "Teste"
 }
 
 ### GET
 GET http://localhost:9000/naipes
 
 ### GET
-GET http://localhost:9000/naipes/1
+GET http://localhost:9000/naipes/6
 
 ### GET
 GET http://localhost:9000/naipes/soprano
 
 ### PATCH
-PATCH http://localhost:9000/naipes/1
+PATCH http://localhost:9000/naipes/10
 Content-Type: application/json
+
 {
-    
+    "naipe": "Teste Teste"
 }
 
 ### DELETE
-DELETE http://localhost:9000/naipes/1
+DELETE http://localhost:9000/naipes/10

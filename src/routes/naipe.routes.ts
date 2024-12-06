@@ -7,12 +7,12 @@ const naipeHttp = "naipes"
 
 NaipeRotas.post(`/${naipeHttp}`, NaipeController.Criar)
 
-NaipeRotas.post(`/${naipeHttp}`, NaipeController.ListarNaipes)
+NaipeRotas.get(`/${naipeHttp}`, NaipeController.ListarNaipes)
 
-NaipeRotas.post(`/${naipeHttp}`, NaipeController.NaipeID)
+NaipeRotas.get(`/${naipeHttp}/:id`, NaipeController.NaipeID)
 
-NaipeRotas.post(`/${naipeHttp}`, NaipeController.Editar)
+NaipeRotas.patch(`/${naipeHttp}/:id`, NaipeController.Editar)
 
-NaipeRotas.post(`/${naipeHttp}`, NaipeController.Apagar)
+NaipeRotas.delete(`/${naipeHttp}/:id`, NaipeController.Apagar)
 
 export { NaipeRotas }

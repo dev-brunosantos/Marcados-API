@@ -84,6 +84,20 @@ class UsuarioServices {
             return "Erro interno! Por favor, tente novamente."
         }
     }
+
+    async ListarUsuarios() {
+        try {
+            const usuariosCadastrados = await usuarios.findMany()
+
+            if(!usuariosCadastrados) {
+                return "Não existe nenhum usuário cadastrado no sistema."
+            }
+
+            return usuariosCadastrados
+        } catch (error) {
+            return "Erro interno! Por favor, tente novamente."
+        }
+    }
 }
 
 export { UsuarioServices }

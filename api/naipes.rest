@@ -3,7 +3,7 @@ POST http://localhost:9000/naipes
 Content-Type: application/json
 
 {
-
+    
 }
 
 ### GET

@@ -8,47 +8,44 @@ datasource db {
 }
 
 model Cargos {
-  id Int @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   cargo String
 
-  dt_criacao DateTime @default(now())
+  dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())
 
   usuarios Usuarios[]
 }
 
 model Vozes {
-  id Int @id @default(autoincrement())
-  // id_usuario String
-  // usuario Usuarios @relation(fields: [id_usuario], references: [id])
+  id  Int    @id @default(autoincrement())
   voz String
 
-  dt_criacao DateTime @default(now())
+  dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())
 }
 
 model Instrumentos {
-  id Int @id @default(autoincrement())
-  // id_usuario String
-  // usuario Usuarios @relation(fields: [id_usuario], references: [id])
+  id          Int    @id @default(autoincrement())
   instrumento String
 
-  dt_criacao DateTime @default(now())
+  dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())
 }
 
 model Usuarios {
-  id String @id @default(uuid())
-  nome String 
+  id    String @id @default(uuid())
+  nome  String
   email String @unique
   senha String
+  // RELACIONAMENTOS
+  cargoId Int
+  cargo   Cargos @relation(fields: [cargoId], references: [id])
+  
+  naipe String
 
-  dt_criacao DateTime @default(now())
+  dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())
 
-  // RELACIONAMENTOS
-  id_cargo Int
-  cargo Cargos @relation(fields: [id_cargo], references: [id])
-  // instrumento Instrumentos[]
-  // vozes Vozes[]
+  
 }

@@ -30,6 +30,7 @@ model Naipes {
 model Usuarios {
   id    String @id @default(uuid())
   nome  String
+  sobrenome String?
   email String @unique
   senha String
   // RELACIONAMENTOS

@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE http://localhost:9000/cargos/6
+DELETE http://localhost:9000/cargos/7

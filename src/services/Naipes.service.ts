@@ -14,7 +14,7 @@ class NaipeServices {
             if(!naipeExistente) {
                 const cadastrar = await naipes.create({ data: { naipe } })
 
-                return `O naipe '${cadastrar.naipe.toUpperCase}' foi cadastrado com sucesso`
+                return `O naipe '${cadastrar.naipe.toUpperCase()}' foi cadastrado com sucesso`
             }
 
             return `O cargo ${naipe} ja esta cadastrado no sistema.`

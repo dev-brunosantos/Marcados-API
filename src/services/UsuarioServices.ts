@@ -8,26 +8,32 @@ interface UsuarioDados {
     email: string;
     senha: string;
     cargoId: string;
-    naipe: string;
+    naipeId: string;
 }
 
 class UsuarioServices {
-    async CadastrarUsuario({ nome, email, senha, cargoId, naipe }:UsuarioDados) {
-        const criarUsuario = await usuarios.findFirst({ where: { email }})
-        if(!criarUsuario) {
-            const senhaCriptografada = await hash(senha, 8)
-            await usuarios.create({
-                data: { 
-                    nome, email,
-                    senha: senhaCriptografada,
-                    cargoId,
-                    naipe
-                }
-            })
-            return "Usuário cadastrado com sucesso."
-        }
-        return "Usuário ja cadastrado no sistema."
-    }
+    // async CadastrarUsuario({ nome, email, senha, cargoId, naipeId }:UsuarioDados) {
+    //     const criarUsuario = await usuarios.findFirst({ where: { email }})
+    //     if(!criarUsuario) {
+
+    //         let tipoCargo = 0;
+    //         let tipoNaipe = 0;
+
+            
+
+    //         const senhaCriptografada = await hash(senha, 8)
+    //         await usuarios.create({
+    //             data: { 
+    //                 nome, email,
+    //                 senha: senhaCriptografada,
+    //                 cargoId,
+    //                 naipeId
+    //             }
+    //         })
+    //         return "Usuário cadastrado com sucesso."
+    //     }
+    //     return "Usuário ja cadastrado no sistema."
+    // }
     
     async ListarUsuarios() {
         const listar = await usuarios.findMany()
@@ -69,15 +75,15 @@ class UsuarioServices {
         return emailUsuario
     }
 
-    async BuscarUsuarioCargo(cargo: string) {
-        const usuarioCargo = await usuarios.findMany({ 
-            where: { cargo }
-        })
-        if(usuarioCargo) {
-            return usuarioCargo
-        }
-        return "Não existe nenhum usuário com o cargo informado."
-    }
+    // async BuscarUsuarioCargo(cargo: string) {
+    //     const usuarioCargo = await usuarios.findMany({ 
+    //         where: { cargo }
+    //     })
+    //     if(usuarioCargo) {
+    //         return usuarioCargo
+    //     }
+    //     return "Não existe nenhum usuário com o cargo informado."
+    // }
 
     async BuscarUsuarioId(id: string) {
         const usuarioID = await usuarios.findFirst({ where: { id }})

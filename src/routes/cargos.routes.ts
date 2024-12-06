@@ -3,9 +3,19 @@ import { CargosControllers } from "../controllers/CargosControlles";
 
 const CargosRotas = Router()
 
+const cargoHttp = "cargos"
+
 // ROTAS DE CARGOS
-CargosRotas.post('/cargos/criar', CargosControllers.CriarCargo)
-CargosRotas.get('/cargos', CargosControllers.ListarCargos)
-CargosRotas.get('/cargos/:cargo', CargosControllers.BuscarCargo)
+CargosRotas.post(`/${cargoHttp}`, CargosControllers.CriarCargo)
+
+CargosRotas.get(`/${cargoHttp}`, CargosControllers.ListarCargos)
+
+CargosRotas.get(`/${cargoHttp}/:id`, CargosControllers.BuscarCargoId)
+
+// CargosRotas.get(`/${cargoHttp}/:cargo`, CargosControllers.BuscarCargo)
+
+CargosRotas.patch(`/${cargoHttp}/:id`, CargosControllers.EditarCargo)
+
+CargosRotas.delete(`/${cargoHttp}/:id`, CargosControllers.ApagarCargo)
 
 export { CargosRotas }

@@ -23,6 +23,8 @@ model Naipes {
 
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())
+
+  usuarios Usuarios[]
 }
 
 model Usuarios {
@@ -34,7 +36,8 @@ model Usuarios {
   cargoId Int
   cargo   Cargos @relation(fields: [cargoId], references: [id])
 
-  naipe String
+  naipeId Int
+  naipe Naipes @relation(fields: [naipeId], references: [id])
 
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())

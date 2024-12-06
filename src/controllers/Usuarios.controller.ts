@@ -11,6 +11,10 @@ class Usuario {
         })
         res.json(novoUsuario)
     }
+    async Listar(req: Request, res: Response) {
+        const usuarios = await service.ListarUsuarios()
+        res.json(usuarios)
+    }
 } 
 
 const UsuarioController = new Usuario()

@@ -6,6 +6,6 @@ const UsuarioRotas = Router()
 const usuarioHttp = "usuarios"
 
 UsuarioRotas.post(`/${usuarioHttp}`, UsuarioController.Cadastrar) 
-UsuarioRotas.post(`/${usuarioHttp}`, UsuarioController.Listar) 
+UsuarioRotas.get(`/${usuarioHttp}`, UsuarioController.Listar) 
 
 export { UsuarioRotas }

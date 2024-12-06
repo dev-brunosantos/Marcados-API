@@ -40,7 +40,5 @@ model Usuarios {
   naipe Naipes @relation(fields: [naipeId], references: [id])
 
   dt_criacao     DateTime @default(now())
-  dt_atualizacao DateTime @default(now())
-
-  
+  dt_atualizacao DateTime @default(now()) 
 }

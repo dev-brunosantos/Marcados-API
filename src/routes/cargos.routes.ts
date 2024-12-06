@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CargosControllers } from "../controllers/CargosControlles";
+import { CargosControllers } from "../controllers/Cargos.controller";
 
 const CargosRotas = Router()
 

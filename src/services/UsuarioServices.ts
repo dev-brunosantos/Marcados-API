@@ -7,12 +7,12 @@ interface UsuarioDados {
     nome: string;
     email: string;
     senha: string;
-    cargo: string;
+    cargoId: string;
     naipe: string;
 }
 
 class UsuarioServices {
-    async CadastrarUsuario({ nome, email, senha, cargo, naipe }:UsuarioDados) {
+    async CadastrarUsuario({ nome, email, senha, cargoId, naipe }:UsuarioDados) {
         const criarUsuario = await usuarios.findFirst({ where: { email }})
         if(!criarUsuario) {
             const senhaCriptografada = await hash(senha, 8)
@@ -20,7 +20,7 @@ class UsuarioServices {
                 data: { 
                     nome, email,
                     senha: senhaCriptografada,
-                    cargo,
+                    cargoId,
                     naipe
                 }
             })

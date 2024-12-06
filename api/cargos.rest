@@ -1,0 +1,26 @@
+### POST
+POST http://localhost:9000/cargos
+Content-Type: application/json
+
+{
+
+}
+
+### GET
+GET http://localhost:9000/cargos
+
+### GET
+GET http://localhost:9000/cargos/1
+
+### GET
+GET http://localhost:9000/cargos/ministro
+
+### PATCH
+PATCH http://localhost:9000/cargos/1
+Content-Type: application/json
+{
+    
+}
+
+### DELETE
+DELETE http://localhost:9000/cargos/1

@@ -5,9 +5,9 @@ const services = new UsuarioServices()
 
 class Usuarios {
     async NovoUsuario(req: Request, res: Response) {
-        const { nome, email, senha, id_cargo } = req.body
+        const { nome, email, senha, cargo, naipe } = req.body
         const criar = await services.CadastrarUsuario({
-            nome, email, senha, id_cargo
+            nome, email, senha, cargo, naipe
         })
         return res.json(criar)
     }

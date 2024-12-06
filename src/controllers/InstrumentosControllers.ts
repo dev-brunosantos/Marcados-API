@@ -10,7 +10,7 @@ class Instrumentos {
         return res.json(categoria)
     }
     async ListarCategorias(req: Request, res: Response) {
-        const instrumentos = services.ListarInstrumentos()
+        const instrumentos = await services.ListarInstrumentos()
         return res.json(instrumentos)
     }
     async BuscarInstrumentos(req: Request, res: Response) {

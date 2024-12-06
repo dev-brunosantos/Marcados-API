@@ -7,27 +7,26 @@ interface UsuarioDados {
     nome: string;
     email: string;
     senha: string;
-    id_cargo: number
+    cargo: string;
+    naipe: string;
 }
 
 class UsuarioServices {
-    async CadastrarUsuario({ nome, email, senha, id_cargo }:UsuarioDados) {
+    async CadastrarUsuario({ nome, email, senha, cargo, naipe }:UsuarioDados) {
         const criarUsuario = await usuarios.findFirst({ where: { email }})
         if(!criarUsuario) {
             const senhaCriptografada = await hash(senha, 8)
-            const criar = await usuarios.create({
+            await usuarios.create({
                 data: { 
                     nome, email,
                     senha: senhaCriptografada,
-                    id_cargo
+                    cargo,
+                    naipe
                 }
             })
-            return {
-                status: "Usuário cadastrado com sucesso.",
-                criar
-            }
+            return "Usuário cadastrado com sucesso."
         }
-        return { erro: "Usuário ja cadastrado no sistema."}
+        return "Usuário ja cadastrado no sistema."
     }
     
     async ListarUsuarios() {
@@ -38,13 +37,12 @@ class UsuarioServices {
                     id: true,
                     nome: true,
                     email: true,
-                    id_cargo: true,
-                    cargo: { select: { cargo: true } }
+                    cargo: true
                 }
             })
-            return { listarUsuarios }
+            return listarUsuarios 
         }
-        return { erro: "Não existe nenhum usuário cadastrado no sistema"}
+        return "Não existe nenhum usuário cadastrado no sistema"
     }
 
     async BuscarUsuario(nome: string) {
@@ -54,40 +52,39 @@ class UsuarioServices {
                 id: true,
                 nome: true,
                 email: true,
-                id_cargo: true,
-                cargo: { select: { cargo: true } }
+                cargo: true 
             }
         })
         if(usuarioNome) {
-            return { usuarioNome }
+            return usuarioNome
         }
-        return {erro: "Não existe usuário com o nome informado."}
+        return "Não existe usuário com o nome informado."
     }
 
     async BuscarEmailUsuario(email: string) {
         const emailUsuario = await usuarios.findFirst({ where: {email }})
         if(!emailUsuario) {
-            return { erro: "Não encontramos nenhum usuário com o email informado."}
+            return "Não encontramos nenhum usuário com o email informado."
         }
-        return { emailUsuario }
+        return emailUsuario
     }
 
     async BuscarUsuarioCargo(cargo: string) {
         const usuarioCargo = await usuarios.findMany({ 
-            where: { cargo: { cargo } }
+            where: { cargo }
         })
         if(usuarioCargo) {
-            return { usuarioCargo }
+            return usuarioCargo
         }
-        return { erro: "Não existe nenhum usuário com o cargo informado."}
+        return "Não existe nenhum usuário com o cargo informado."
     }
 
     async BuscarUsuarioId(id: string) {
         const usuarioID = await usuarios.findFirst({ where: { id }})
         if(usuarioID) {
-            return { usuarioID }
+            return usuarioID
         }
-        return { erro: "Não existe nenhum usuário com o ID informado. "}
+        return "Não existe nenhum usuário com o ID informado. "
     }
 }
 

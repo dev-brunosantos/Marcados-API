@@ -17,17 +17,9 @@ model Cargos {
   usuarios Usuarios[]
 }
 
-model Vozes {
+model Naipes {
   id  Int    @id @default(autoincrement())
-  voz String
-
-  dt_criacao     DateTime @default(now())
-  dt_atualizacao DateTime @default(now())
-}
-
-model Instrumentos {
-  id          Int    @id @default(autoincrement())
-  instrumento String
+  naipe String
 
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())
@@ -41,7 +33,7 @@ model Usuarios {
   // RELACIONAMENTOS
   cargoId Int
   cargo   Cargos @relation(fields: [cargoId], references: [id])
-  
+
   naipe String
 
   dt_criacao     DateTime @default(now())

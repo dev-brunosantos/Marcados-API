@@ -19,7 +19,7 @@ model Cargos {
 
 model Naipes {
   id  Int    @id @default(autoincrement())
-  naipe String
+  naipe String @unique
 
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now())

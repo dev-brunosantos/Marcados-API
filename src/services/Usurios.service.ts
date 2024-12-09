@@ -84,12 +84,17 @@ class UsuarioServices {
             })
 
             if(usuarioIdExistente) {
+
+                let data = usuarioIdExistente.dt_criacao.toISOString().slice(0, 10).split("-")
+                 
+                console.log(data)
+
                 const dadosUsuario = {
                     id: usuarioIdExistente.id,
                     nome: usuarioIdExistente.nome,
                     sobrenome: usuarioIdExistente.sobrenome,
                     email: usuarioIdExistente.email,
-                    cadastro: usuarioIdExistente.dt_criacao
+                    cadastro: data[2] + "/" + data[1] + "/" + data[0] //usuarioIdExistente.dt_criacao
                 }
 
                 return dadosUsuario

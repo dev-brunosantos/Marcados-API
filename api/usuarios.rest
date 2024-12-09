@@ -3,7 +3,12 @@ POST http://localhost:9000/usuarios
 Content-Type: application/json
 
 {
-
+    "nome": "Bruno",
+    "sobrenome": "Santos",
+    "email": "brunosemail.com",
+    "senha": "Brunosds1@",
+    "cargo": "Musico",
+    "naipe": "Teclado"
 }
 
 ### GET

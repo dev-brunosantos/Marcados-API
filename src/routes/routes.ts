@@ -1,9 +1,11 @@
 import { CargosRotas } from "./cargos.routes";
 import { NaipeRotas } from "./naipe.routes";
+import { UsuarioRotas } from "./usuarios.routes";
 
 const routes = {
     CargosRotas,
-    NaipeRotas
+    NaipeRotas,
+    UsuarioRotas
 }
 
 export { routes }

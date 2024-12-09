@@ -69,6 +69,37 @@ class UsuarioServices {
             return "Erro interno! Por favor, tente novamente."
         }
     }
+
+    async BuscarUsuarioId(id: string) {
+        try {
+            const usuarioIdExistente = await usuarios.findFirst({ 
+                where: { id },
+                select: {
+                    id: true,
+                    nome: true,
+                    sobrenome: true,
+                    email: true,
+                    dt_criacao: true,
+                }
+            })
+
+            if(usuarioIdExistente) {
+                const dadosUsuario = {
+                    id: usuarioIdExistente.id,
+                    nome: usuarioIdExistente.nome,
+                    sobrenome: usuarioIdExistente.sobrenome,
+                    email: usuarioIdExistente.email,
+                    cadastro: usuarioIdExistente.dt_criacao
+                }
+
+                return dadosUsuario
+            }
+
+            return "Não existe nenhum usuário cadastrado com o ID informado"
+        } catch (error) {
+            return "Erro interno! Por favor, tente novamente."
+        }
+    }
 }
 
 export { UsuarioServices }

@@ -15,6 +15,11 @@ class Usuario {
         const usuarios = await service.ListarUsuarios()
         res.json(usuarios)
     }
+    async UsuarioId(req: Request, res: Response) {
+        const { id } = req.params
+        const usuarioNome = await service.BuscarUsuarioId(id)
+        return usuarioNome
+    }
 } 
 
 const UsuarioController = new Usuario()

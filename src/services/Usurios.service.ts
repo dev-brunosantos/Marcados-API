@@ -87,7 +87,20 @@ class UsuarioServices {
 
     async ListarUsuarios() {
         try {
-            const usuariosCadastrados = await usuarios.findMany()
+            const usuariosCadastrados = await usuarios.findMany({
+                select: {
+                    id: true,
+                    nome: true,
+                    sobrenome: true,
+                    email: true,
+                    cargo: {
+                        select: { id: true, cargo: true }
+                    },
+                    naipe: {
+                        select: { id: true, naipe: true }
+                    }
+                }
+            })
 
             if(!usuariosCadastrados) {
                 return "Não existe nenhum usuário cadastrado no sistema."

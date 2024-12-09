@@ -9,11 +9,17 @@ Content-Type: application/json
 ### GET
 GET http://localhost:9000/usuarios
 
-### GET
-GET http://localhost:9000/usuarios/1
+### GET 
+GET http://localhost:9000/usuarios/usuario_id?id=8753c078-2d56-41c6-a3e5-131c0d6c2492
 
-### GET
-GET http://localhost:9000/usuarios/bruno
+
+### POST
+POST http://localhost:9000/usuarios/nome 
+Content-Type: application/json
+
+{
+    "nome": "rodolfo"
+}
 
 ### PATCH
 PATCH http://localhost:9000/usuarios/1

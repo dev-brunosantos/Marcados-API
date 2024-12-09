@@ -1,49 +1,38 @@
-export function EscolherCargo(cargo: string, cargoId: number) {
+export function EscolherCargo(cargo: string): number {
     switch (cargo) {
         case "Ministro":
-            cargoId = 2
-            break;
+            return 2;
         case "Vocal":
-            cargoId = 3
-            break;
+            return 3;
         case "Musico":
-            cargoId = 4
-            break;
+            return 4;
         default:
-            return "Não existe esse cargo."
+            throw new Error("Não existe esse cargo.")
     }
 }
 
-export function EscolherNaipe(naipe: string, naipeId: number) {
+export function EscolherNaipe(naipe: string): number {
     switch (naipe) {
         case "Soprano":
-            naipeId = 1
-            break;
+            return 1
         case "Contralto":
-            naipeId = 2
-            break;
+            return 2
         case "Tenor":
-            naipeId = 3
-            break;
+            return 3
         case "Sax":
-            naipeId = 4
-            break;
+            return 4
         case "Teclado":
-            naipeId = 5
-            break;
+            return 5
+            
         case "Violão":
-            naipeId = 6
-            break;
+            return 6
         case "Guitarra":
-            naipeId = 7
-            break;
+            return 7
         case "Baixo":
-            naipeId = 8
-            break;
+            return 8
         case "Bateria":
-            naipeId = 9
-            break;
+            return 9
         default:
-            return "Não existe esse naipe."
+            throw new Error("Não existe esse naipe.")
     }
 }

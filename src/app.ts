@@ -9,5 +9,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(routes.CargosRotas)
 app.use(routes.NaipeRotas)
+app.use(routes.UsuarioRotas)
 
 export { app }

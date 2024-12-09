@@ -1,5 +1,10 @@
 import { prismaConfig } from "../config/prismaConfig";
 import { EscolherCargo, EscolherNaipe } from "../functions/cargo_naipe";
+import { FormataData } from "../functions/formata_data";
+<<<<<<< HEAD
+=======
+import { FormataData } from "../functions/formata_data";
+>>>>>>> 6950bf3fd82787c13cdfe282eb298c34e22446ea
 
 interface UsuarioModel {
     nome: string;
@@ -65,6 +70,71 @@ class UsuarioServices {
             }
 
             return usuariosCadastrados
+        } catch (error) {
+            return "Erro interno! Por favor, tente novamente."
+        }
+    }
+
+    async BuscarUsuarioId(id: string) {
+        try {
+            const usuarioIdExistente = await usuarios.findFirst({ 
+                where: { id },
+                select: {
+                    id: true,
+                    nome: true,
+                    sobrenome: true,
+                    email: true,
+                    dt_criacao: true,
+                }
+            })
+
+            if(usuarioIdExistente) {
+
+                let dataFormatada = FormataData(usuarioIdExistente.dt_criacao)
+                 
+                const dadosUsuario = {
+                    id: usuarioIdExistente.id,
+                    nome: usuarioIdExistente.nome,
+                    sobrenome: usuarioIdExistente.sobrenome,
+                    email: usuarioIdExistente.email,
+                    cadastro: dataFormatada
+                }
+
+                return dadosUsuario
+            }
+
+            return "Não existe nenhum usuário cadastrado com o ID informado"
+        } catch (error) {
+            return "Erro interno! Por favor, tente novamente."
+        }
+    }
+
+    async BuscarUsuarionNome(nome: string) {
+        try {
+            const usuarioIdExistente = await usuarios.findFirst({ 
+                where: { nome: { equals: nome, mode: 'insensitive' } },
+                select: {
+                    id: true,
+                    nome: true,
+                    sobrenome: true,
+                    email: true,
+                    dt_criacao: true,
+                }
+            })
+
+            if(usuarioIdExistente) {
+                const dadosUsuario = {
+                    id: usuarioIdExistente.id,
+                    nome: usuarioIdExistente.nome,
+                    sobrenome: usuarioIdExistente.sobrenome,
+                    email: usuarioIdExistente.email,
+                    cadastro: usuarioIdExistente.dt_criacao
+                }
+
+                return dadosUsuario
+            }
+
+            return "Não existe nenhum usuário cadastrado com o ID informado"
         } catch (error) {
             return "Erro interno! Por favor, tente novamente."
         }

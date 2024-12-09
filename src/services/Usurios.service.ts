@@ -1,5 +1,6 @@
 import { prismaConfig } from "../config/prismaConfig";
 import { EscolherCargo, EscolherNaipe } from "../functions/cargo_naipe";
+import { FormataData } from "../functions/formata_data";
 
 interface UsuarioModel {
     nome: string;
@@ -85,16 +86,16 @@ class UsuarioServices {
 
             if(usuarioIdExistente) {
 
-                let data = usuarioIdExistente.dt_criacao.toISOString().slice(0, 10).split("-")
+                // let data = usuarioIdExistente.dt_criacao.toISOString().slice(0, 10).split("-")
+                let dataFormatada = FormataData(usuarioIdExistente.dt_criacao)
                  
-                console.log(data)
-
                 const dadosUsuario = {
                     id: usuarioIdExistente.id,
                     nome: usuarioIdExistente.nome,
                     sobrenome: usuarioIdExistente.sobrenome,
                     email: usuarioIdExistente.email,
-                    cadastro: data[2] + "/" + data[1] + "/" + data[0] //usuarioIdExistente.dt_criacao
+                    // cadastro: data[2] + "/" + data[1] + "/" + data[0] //usuarioIdExistente.dt_criacao
+                    cadastro: dataFormatada //usuarioIdExistente.dt_criacao
                 }
 
                 return dadosUsuario

@@ -86,7 +86,6 @@ class UsuarioServices {
 
             if(usuarioIdExistente) {
 
-                // let data = usuarioIdExistente.dt_criacao.toISOString().slice(0, 10).split("-")
                 let dataFormatada = FormataData(usuarioIdExistente.dt_criacao)
                  
                 const dadosUsuario = {
@@ -94,8 +93,7 @@ class UsuarioServices {
                     nome: usuarioIdExistente.nome,
                     sobrenome: usuarioIdExistente.sobrenome,
                     email: usuarioIdExistente.email,
-                    // cadastro: data[2] + "/" + data[1] + "/" + data[0] //usuarioIdExistente.dt_criacao
-                    cadastro: dataFormatada //usuarioIdExistente.dt_criacao
+                    cadastro: dataFormatada
                 }
 
                 return dadosUsuario

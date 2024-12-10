@@ -38,4 +38,4 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE http://localhost:9000/usuarios/1
+DELETE http://localhost:9000/usuarios/apagar?id=7483843f-49c2-49b9-8f9a-f295836ab8f7

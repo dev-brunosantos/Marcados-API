@@ -10,6 +10,6 @@ UsuarioRotas.get(`/${usuarioHttp}`, UsuarioController.Listar)
 UsuarioRotas.get(`/${usuarioHttp}/usuario_id`, UsuarioController.UsuarioId) 
 UsuarioRotas.post(`/${usuarioHttp}/:nome`, UsuarioController.UsuarioNome) 
 UsuarioRotas.patch(`/${usuarioHttp}/editar/:id`, UsuarioController.EditarUsuario) 
-UsuarioRotas.delete(`/${usuarioHttp}/apagar/:id`, UsuarioController.ApagarDados) 
+UsuarioRotas.delete(`/${usuarioHttp}/apagar`, UsuarioController.ApagarDados) 
 
 export { UsuarioRotas }

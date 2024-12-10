@@ -31,11 +31,10 @@ class Usuario {
         res.json(usuarioNome)
     }
     async EditarUsuario(req: Request, res: Response) {
-        const { id } = req.params
-        const { nome, sobrenome, cargo, naipe } = req.body
+        const { nome, email, sobrenome, cargo, naipe } = req.body
 
         const usuarioEditado = await service.EditarDados(
-            id, nome, sobrenome, cargo, naipe
+            nome, email, sobrenome, cargo, naipe
         )
 
         res.json(usuarioEditado)

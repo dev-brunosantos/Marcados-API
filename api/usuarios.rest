@@ -15,7 +15,7 @@ Content-Type: application/json
 GET http://localhost:9000/usuarios
 
 ### GET 
-GET http://localhost:9000/usuarios/usuario_id?id=7483843f-49c2-49b9-8f9a-f295836ab8f7
+GET http://localhost:9000/usuarios/usuario_id?id=2604a86b-84f7-4010-b843-f1abeb6d60ca
 
 
 ### POST

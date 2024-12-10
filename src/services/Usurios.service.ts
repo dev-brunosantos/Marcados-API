@@ -81,6 +81,8 @@ class UsuarioServices {
                     nome: true,
                     sobrenome: true,
                     email: true,
+                    cargo: true,
+                    naipe: true,
                     dt_criacao: true,
                 }
             })
@@ -89,13 +91,23 @@ class UsuarioServices {
 
                 let dataFormatada = FormataData(usuarioIdExistente.dt_criacao)
 
-                const dadosUsuario = {
-                    id: usuarioIdExistente.id,
-                    nome: usuarioIdExistente.nome,
-                    sobrenome: usuarioIdExistente.sobrenome,
-                    email: usuarioIdExistente.email,
-                    cadastro: dataFormatada
-                }
+                // const dadosUsuario = {
+                //     id: usuarioIdExistente.id,
+                //     nome: usuarioIdExistente.nome,
+                //     sobrenome: usuarioIdExistente.sobrenome,
+                //     email: usuarioIdExistente.email,
+                //     cadastro: dataFormatada
+                // }
+
+                const dadosUsuario = FormataDados(
+                    usuarioIdExistente.id,
+                    usuarioIdExistente.nome,
+                    usuarioIdExistente.sobrenome,
+                    usuarioIdExistente.email,
+                    usuarioIdExistente.cargo.cargo,
+                    usuarioIdExistente.naipe.naipe,
+                    dataFormatada, ""
+                )
 
                 return dadosUsuario
             }

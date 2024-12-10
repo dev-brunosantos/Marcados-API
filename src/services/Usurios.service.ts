@@ -91,14 +91,6 @@ class UsuarioServices {
 
                 let dataFormatada = FormataData(usuarioIdExistente.dt_criacao)
 
-                // const dadosUsuario = {
-                //     id: usuarioIdExistente.id,
-                //     nome: usuarioIdExistente.nome,
-                //     sobrenome: usuarioIdExistente.sobrenome,
-                //     email: usuarioIdExistente.email,
-                //     cadastro: dataFormatada
-                // }
-
                 const dadosUsuario = FormataDados(
                     usuarioIdExistente.id,
                     usuarioIdExistente.nome,
@@ -120,25 +112,30 @@ class UsuarioServices {
 
     async BuscarUsuarionNome(nome: string) {
         try {
-            const usuarioIdExistente = await usuarios.findFirst({
+            const usuarioNome = await usuarios.findFirst({
                 where: { nome: { equals: nome, mode: 'insensitive' } },
                 select: {
                     id: true,
                     nome: true,
                     sobrenome: true,
                     email: true,
+                    cargo: true,
+                    naipe: true,
                     dt_criacao: true,
                 }
             })
 
-            if (usuarioIdExistente) {
-                const dadosUsuario = {
-                    id: usuarioIdExistente.id,
-                    nome: usuarioIdExistente.nome,
-                    sobrenome: usuarioIdExistente.sobrenome,
-                    email: usuarioIdExistente.email,
-                    cadastro: usuarioIdExistente.dt_criacao
-                }
+            if (usuarioNome) {
+                let dataFormatada = FormataData(usuarioNome.dt_criacao)
+                const dadosUsuario = FormataDados(
+                    usuarioNome.id,
+                    usuarioNome.nome,
+                    usuarioNome.sobrenome,
+                    usuarioNome.email,
+                    usuarioNome.cargo.cargo,
+                    usuarioNome.naipe.naipe,
+                    dataFormatada, ""
+                )
 
                 return dadosUsuario
             }
@@ -149,7 +146,6 @@ class UsuarioServices {
         }
     }
 
-    // async EditarDados(nome: string, email: string, sobrenome: string, cargo: string, naipe: string) {
     async EditarDados(id: string, nome: string, sobrenome: string, cargo: string, naipe: string) {
         try {
             const idUsuarioExistente = await usuarios.findFirst({
@@ -211,6 +207,21 @@ class UsuarioServices {
             return "O ID informado não esta vinculado a nenhum usuário cadastrado no sistema."
         } catch (error) {
             console.error(error)
+            return "Erro interno! Por favor, tente novamente."
+        }
+    }
+
+    async ApagarDados(id: string) {
+        try {
+            const usuarioId = await usuarios.findFirst({ where: { id }})
+
+            if(usuarioId) {
+                await usuarios.delete({ where: { id }})
+                return `Os dados do usuário ${usuarioId.nome.toUpperCase()} foram excluídos com uscesso.`
+            }
+
+            return "Não encontramos nenhum usuário vinculado ao ID informado."
+        } catch (error) {
             return "Erro interno! Por favor, tente novamente."
         }
     }

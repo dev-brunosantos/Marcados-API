@@ -27,11 +27,11 @@ Content-Type: application/json
 }
 
 ### PATCH 
-PATCH  http://localhost:9000/usuarios/7483843f-49c2-49b9-8f9a-f295836ab8f7
+PATCH  http://localhost:9000/usuarios/editar/7483843f-49c2-49b9-8f9a-f295836ab8f7
 Content-Type: application/json
 
 {
-    "nome": "",
+    "nome": "Uelves",
     "sobrenome": "",
     "cargo": "Musico",
     "naipe": "Teclado"

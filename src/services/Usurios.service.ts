@@ -136,10 +136,11 @@ class UsuarioServices {
         }
     }
 
-    async EditarDados(nome: string, email: string, sobrenome: string, cargo: string, naipe: string) {
+    // async EditarDados(nome: string, email: string, sobrenome: string, cargo: string, naipe: string) {
+    async EditarDados(id: string, nome: string, sobrenome: string, cargo: string, naipe: string) {
         try {
             const idUsuarioExistente = await usuarios.findFirst({
-                where: { email },
+                where: { id },
                 select: {
                     id: true, nome: true, sobrenome: true, email: true,
                     cargo: { select: { id: true, cargo: true } },
@@ -159,30 +160,40 @@ class UsuarioServices {
                 naipeId = EscolherNaipe(naipe)
 
                 const usuarioEditado = await usuarios.update({
-                    where: { email },
+                    where: { id },
                     data: {
                         nome: nome.trim() === "" ? idUsuarioExistente.nome : nome,
                         sobrenome: sobrenome.trim() === "" ? idUsuarioExistente.sobrenome : sobrenome,
                         cargoId: !cargoId ? idUsuarioExistente.cargo.id : cargoId,
                         naipeId: !naipeId ? idUsuarioExistente.naipe.id : naipeId,
-                        dt_criacao: dataCadastroFormatada,
-                        dt_atualizacao: dataAtualizacaoFormatada
                     },
                     select: {
                         id: true, nome: true, sobrenome: true, email: true,
                         cargo: { select: { id: true, cargo: true } },
-                        naipe: { select: { id: true, naipe: true } },
-                        dt_criacao: true, dt_atualizacao: true
+                        naipe: { select: { id: true, naipe: true } }
                     }
                 })
+
+                const dadosAtualizados = {
+                    id: usuarioEditado.id,
+                    nome: usuarioEditado.nome,
+                    sobrenome: usuarioEditado.sobrenome,
+                    email: usuarioEditado.email,
+                    cargo: usuarioEditado.cargo.cargo,
+                    naipe: usuarioEditado.naipe.naipe,
+                    cadastro: dataCadastroFormatada,
+                    atualizacao: dataAtualizacaoFormatada
+                }
 
                 return {
                     status: "Os dados foram atualizados com sucesso.",
                     dados_antigos: idUsuarioExistente,
-                    dados_atualizados: usuarioEditado
+                    dados_atualizados: dadosAtualizados
                 }
             }
+            return "O ID informado não esta vinculado a nenhum usuário cadastrado no sistema."
         } catch (error) {
+            console.error(error)
             return "Erro interno! Por favor, tente novamente."
         }
     }

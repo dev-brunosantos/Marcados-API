@@ -136,10 +136,10 @@ class UsuarioServices {
         }
     }
 
-    async EditarDados(id: string, nome: string, sobrenome: string, cargo: string, naipe: string) {
+    async EditarDados(nome: string, email: string, sobrenome: string, cargo: string, naipe: string) {
         try {
             const idUsuarioExistente = await usuarios.findFirst({
-                where: { id },
+                where: { email },
                 select: {
                     id: true, nome: true, sobrenome: true, email: true,
                     cargo: { select: { id: true, cargo: true } },
@@ -159,7 +159,7 @@ class UsuarioServices {
                 naipeId = EscolherNaipe(naipe)
 
                 const usuarioEditado = await usuarios.update({
-                    where: { id },
+                    where: { email },
                     data: {
                         nome: nome.trim() === "" ? idUsuarioExistente.nome : nome,
                         sobrenome: sobrenome.trim() === "" ? idUsuarioExistente.sobrenome : sobrenome,

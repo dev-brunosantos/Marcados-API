@@ -1,10 +1,6 @@
 import { prismaConfig } from "../config/prismaConfig";
 import { EscolherCargo, EscolherNaipe } from "../functions/cargo_naipe";
 import { FormataData } from "../functions/formata_data";
-<<<<<<< HEAD
-=======
-import { FormataData } from "../functions/formata_data";
->>>>>>> 6950bf3fd82787c13cdfe282eb298c34e22446ea
 
 interface UsuarioModel {
     nome: string;

@@ -31,10 +31,15 @@ class Usuario {
         res.json(usuarioNome)
     }
     async EditarUsuario(req: Request, res: Response) {
-        const { nome, email, sobrenome, cargo, naipe } = req.body
+        const { id } = req.params
+
+        if(typeof id !== "string") {
+            throw new Error("O ID informado não esta no formato correto.")
+        }
+        const { nome, sobrenome, cargo, naipe } = req.body
 
         const usuarioEditado = await service.EditarDados(
-            nome, email, sobrenome, cargo, naipe
+            id, nome, sobrenome, cargo, naipe
         )
 
         res.json(usuarioEditado)

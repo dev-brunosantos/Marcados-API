@@ -32,9 +32,9 @@ Content-Type: application/json
 
 {
     "nome": "Uelves",
-    "sobrenome": "",
+    "sobrenome": "Garcia",
     "cargo": "Musico",
-    "naipe": "Teclado"
+    "naipe": "Violão"
 }
 
 ### DELETE

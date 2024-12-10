@@ -16,10 +16,10 @@ class Usuario {
         res.json(usuarios)
     }
     async UsuarioId(req: Request, res: Response) {
-        const { id }  = req.query
+        const { id } = req.query
 
-        if(typeof id !== 'string') {
-            return res.json({ erro: "O parametro de consulta não esta no formato correto"})
+        if (typeof id !== 'string') {
+            return res.json({ erro: "O parametro de consulta não esta no formato correto" })
         }
 
         const usuarioNome = await service.BuscarUsuarioId(id)
@@ -33,7 +33,7 @@ class Usuario {
     async EditarUsuario(req: Request, res: Response) {
         const { id } = req.params
 
-        if(typeof id !== "string") {
+        if (typeof id !== "string") {
             throw new Error("O ID informado não esta no formato correto.")
         }
         const { nome, sobrenome, cargo, naipe } = req.body
@@ -44,7 +44,16 @@ class Usuario {
 
         res.json(usuarioEditado)
     }
-} 
+    async ApagarDados(req: Request, res: Response) {
+        const { id } = req.query
+
+        if (typeof id !== "string") {
+            throw new Error("O ID informado não esta no formato correto.")
+        }
+        const apagar = await service.ApagarDados(id)
+        res.json(apagar)
+    }
+}
 
 const UsuarioController = new Usuario()
 

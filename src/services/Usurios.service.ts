@@ -1,6 +1,7 @@
 import { prismaConfig } from "../config/prismaConfig";
 import { EscolherCargo, EscolherNaipe } from "../functions/cargo_naipe";
 import { FormataData } from "../functions/formata_data";
+import { FormataDados } from "../functions/usuario_dados";
 
 interface UsuarioModel {
     nome: string;
@@ -164,30 +165,34 @@ class UsuarioServices {
                     data: {
                         nome: nome.trim() === "" ? idUsuarioExistente.nome : nome,
                         sobrenome: sobrenome.trim() === "" ? idUsuarioExistente.sobrenome : sobrenome,
-                        cargoId: !cargoId ? idUsuarioExistente.cargo.id : cargoId,
-                        naipeId: !naipeId ? idUsuarioExistente.naipe.id : naipeId,
+                        cargoId: cargo.trim() === "" ? idUsuarioExistente.cargo.id : cargoId,
+                        naipeId: naipe.trim() === "" ? idUsuarioExistente.naipe.id : naipeId,
                     },
                     select: {
                         id: true, nome: true, sobrenome: true, email: true,
                         cargo: { select: { id: true, cargo: true } },
-                        naipe: { select: { id: true, naipe: true } }
+                        naipe: { select: { id: true, naipe: true } },
+                        dt_criacao: true, dt_atualizacao: true
                     }
                 })
 
-                const dadosAtualizados = {
-                    id: usuarioEditado.id,
-                    nome: usuarioEditado.nome,
-                    sobrenome: usuarioEditado.sobrenome,
-                    email: usuarioEditado.email,
-                    cargo: usuarioEditado.cargo.cargo,
-                    naipe: usuarioEditado.naipe.naipe,
-                    cadastro: dataCadastroFormatada,
-                    atualizacao: dataAtualizacaoFormatada
-                }
+                const dadosAnteriores = FormataDados(
+                    idUsuarioExistente.id, idUsuarioExistente.nome, idUsuarioExistente.sobrenome,
+                    idUsuarioExistente.email,
+                    idUsuarioExistente.cargo.cargo, idUsuarioExistente.naipe.naipe,
+                    dataCadastroFormatada, ""
+                )
+
+                const dadosAtualizados = FormataDados(
+                    usuarioEditado.id, usuarioEditado.nome, usuarioEditado.sobrenome,
+                    usuarioEditado.email,
+                    usuarioEditado.cargo.cargo, usuarioEditado.naipe.naipe,
+                    dataCadastroFormatada, dataAtualizacaoFormatada
+                )
 
                 return {
                     status: "Os dados foram atualizados com sucesso.",
-                    dados_antigos: idUsuarioExistente,
+                    dados_antigos: dadosAnteriores,
                     dados_atualizados: dadosAtualizados
                 }
             }

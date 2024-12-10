@@ -30,6 +30,16 @@ class Usuario {
         const usuarioNome = await service.BuscarUsuarionNome(nome)
         res.json(usuarioNome)
     }
+    async EditarUsuario(req: Request, res: Response) {
+        const { id } = req.params
+        const { nome, sobrenome, cargo, naipe } = req.body
+
+        const usuarioEditado = await service.EditarDados(
+            id, nome, sobrenome, cargo, naipe
+        )
+
+        res.json(usuarioEditado)
+    }
 } 
 
 const UsuarioController = new Usuario()

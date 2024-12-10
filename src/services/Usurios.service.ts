@@ -28,10 +28,10 @@ class UsuarioServices {
 
                 const novoUsuario = await usuarios.create({
                     data: {
-                        nome, 
-                        sobrenome, 
+                        nome,
+                        sobrenome,
                         email,
-                        senha, 
+                        senha,
                         cargoId,
                         naipeId
                     }
@@ -61,7 +61,7 @@ class UsuarioServices {
                 }
             })
 
-            if(!usuariosCadastrados) {
+            if (!usuariosCadastrados) {
                 return "Não existe nenhum usuário cadastrado no sistema."
             }
 
@@ -73,7 +73,7 @@ class UsuarioServices {
 
     async BuscarUsuarioId(id: string) {
         try {
-            const usuarioIdExistente = await usuarios.findFirst({ 
+            const usuarioIdExistente = await usuarios.findFirst({
                 where: { id },
                 select: {
                     id: true,
@@ -84,10 +84,10 @@ class UsuarioServices {
                 }
             })
 
-            if(usuarioIdExistente) {
+            if (usuarioIdExistente) {
 
                 let dataFormatada = FormataData(usuarioIdExistente.dt_criacao)
-                 
+
                 const dadosUsuario = {
                     id: usuarioIdExistente.id,
                     nome: usuarioIdExistente.nome,
@@ -107,7 +107,7 @@ class UsuarioServices {
 
     async BuscarUsuarionNome(nome: string) {
         try {
-            const usuarioIdExistente = await usuarios.findFirst({ 
+            const usuarioIdExistente = await usuarios.findFirst({
                 where: { nome: { equals: nome, mode: 'insensitive' } },
                 select: {
                     id: true,
@@ -118,7 +118,7 @@ class UsuarioServices {
                 }
             })
 
-            if(usuarioIdExistente) {
+            if (usuarioIdExistente) {
                 const dadosUsuario = {
                     id: usuarioIdExistente.id,
                     nome: usuarioIdExistente.nome,
@@ -131,6 +131,57 @@ class UsuarioServices {
             }
 
             return "Não existe nenhum usuário cadastrado com o ID informado"
+        } catch (error) {
+            return "Erro interno! Por favor, tente novamente."
+        }
+    }
+
+    async EditarDados(id: string, nome: string, sobrenome: string, cargo: string, naipe: string) {
+        try {
+            const idUsuarioExistente = await usuarios.findFirst({
+                where: { id },
+                select: {
+                    id: true, nome: true, sobrenome: true, email: true,
+                    cargo: { select: { id: true, cargo: true } },
+                    naipe: { select: { id: true, naipe: true } },
+                    dt_criacao: true, dt_atualizacao: true
+                }
+            })
+
+            if (idUsuarioExistente) {
+
+                var cargoId = 0;
+                var naipeId = 0;
+                var dataCadastroFormatada = FormataData(idUsuarioExistente.dt_criacao)
+                var dataAtualizacaoFormatada = FormataData(idUsuarioExistente.dt_atualizacao)
+
+                cargoId = EscolherCargo(cargo)
+                naipeId = EscolherNaipe(naipe)
+
+                const usuarioEditado = await usuarios.update({
+                    where: { id },
+                    data: {
+                        nome: nome.trim() === "" ? idUsuarioExistente.nome : nome,
+                        sobrenome: sobrenome.trim() === "" ? idUsuarioExistente.sobrenome : sobrenome,
+                        cargoId: !cargoId ? idUsuarioExistente.cargo.id : cargoId,
+                        naipeId: !naipeId ? idUsuarioExistente.naipe.id : naipeId,
+                        dt_criacao: dataCadastroFormatada,
+                        dt_atualizacao: dataAtualizacaoFormatada
+                    },
+                    select: {
+                        id: true, nome: true, sobrenome: true, email: true,
+                        cargo: { select: { id: true, cargo: true } },
+                        naipe: { select: { id: true, naipe: true } },
+                        dt_criacao: true, dt_atualizacao: true
+                    }
+                })
+
+                return {
+                    status: "Os dados foram atualizados com sucesso.",
+                    dados_antigos: idUsuarioExistente,
+                    dados_atualizados: usuarioEditado
+                }
+            }
         } catch (error) {
             return "Erro interno! Por favor, tente novamente."
         }

@@ -13,7 +13,7 @@ class CargosServices {
 
             if (!cargoExistente) {
                 const criarCargo = await cargos.create({
-                    data: { cargo }
+                    data: { cargo },
                 })
 
                 return `O cargo ${criarCargo.cargo} foi cadastrado com sucesso.`

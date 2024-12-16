@@ -27,14 +27,14 @@ Content-Type: application/json
 }
 
 ### PATCH 
-PATCH  http://localhost:9000/usuarios/editar/d6ab7a50-26f1-41f6-bd15-e49efd2c2fd2
+PATCH  http://localhost:9000/usuarios/editar/447c4ece-89bc-40a0-8e42-d2a42a386011
 Content-Type: application/json
 
 {
     "nome": "",
     "sobrenome": "",
-    "cargo": "Vocal",
-    "naipe": "Tenor"
+    "cargo": "Ministro",
+    "naipe": "Contralto"
 }
 
 ### DELETE

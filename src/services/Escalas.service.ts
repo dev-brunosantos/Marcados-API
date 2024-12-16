@@ -1,9 +1,11 @@
-import { FiltrarIntegrantes } from "../functions/filtrar_integrantes";
+import { FiltrarIntegrantes, FiltrarMinistros } from "../functions/filtrar_integrantes";
 import { filtrarNaipe } from "../functions/filtrar_naipe_escala";
 
 class EscalasServices {
     async CriarEscala() {
         try {
+            const ministro = await FiltrarMinistros("Ministro")
+
             const soprano = await FiltrarIntegrantes("Soprano")
             const contralto = await FiltrarIntegrantes("Contralto")
             const tenor = await FiltrarIntegrantes("Tenor")
@@ -17,6 +19,7 @@ class EscalasServices {
             if (soprano && contralto && tenor) {
 
                 const dados = {
+                    ministro: ministro[Math.floor(Math.random() * ministro.length)],
                     sopranos: [ filtrarNaipe(soprano) ],
                     contraltos: [ filtrarNaipe(contralto) ],
                     tenores: [ filtrarNaipe(tenor) ],

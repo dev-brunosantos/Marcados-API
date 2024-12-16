@@ -16,7 +16,6 @@ export async function FiltrarIntegrantes(naipe: string) {
         }
     })
 
-    // const pessoas = integrante.map(pes => pes.nome);
     const pessoas = integrante.map(pes => `${pes.nome} ${pes.sobrenome}`);
     return pessoas;
 }
@@ -35,7 +34,6 @@ export async function FiltrarMinistros(cargo: string) {
         }
     })
 
-    // const pessoas = integrante.map(pes => pes.nome);
     const pessoas = integrante.map(pes => `${pes.nome} ${pes.sobrenome}`);
     return pessoas;
 }

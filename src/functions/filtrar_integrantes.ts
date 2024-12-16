@@ -16,6 +16,7 @@ export async function FiltrarIntegrantes(naipe: string) {
         }
     })
 
-    const pessoas = integrante.map(pes => pes.nome);
+    // const pessoas = integrante.map(pes => pes.nome);
+    const pessoas = integrante.map(pes => `${pes.nome} ${pes.sobrenome}`);
     return pessoas;
 }

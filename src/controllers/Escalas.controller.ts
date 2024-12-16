@@ -12,6 +12,11 @@ class Escalas {
         const gerar = await services.CriarEscala()
         res.json(gerar)
     }
+
+    async ListarEscalas(req: Request, res: Response) {
+        const escalas = await services.ListarEscalas()
+        res.json(escalas)
+    }
 }
 
 const EscalasController = new Escalas()

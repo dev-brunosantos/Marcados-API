@@ -54,6 +54,6 @@ model Escalas {
   violao String
   guitarra String
   baixo String
-  bateria String[]
-  dt_culto DateTime @default(now())
+  bateria String
+  dt_culto DateTime?
 }

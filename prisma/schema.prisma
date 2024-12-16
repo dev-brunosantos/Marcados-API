@@ -45,7 +45,8 @@ model Usuarios {
 }
 
 model Escalas {
-  id Int @id @default(autoincrement())
+  id String @id @unique 
+  // id Int @id @default(autoincrement())
   ministro String
   soprano String[]
   contralto String[]
@@ -55,5 +56,5 @@ model Escalas {
   guitarra String
   baixo String
   bateria String
-  dt_culto DateTime?
+  dt_culto DateTime @default(now())
 }

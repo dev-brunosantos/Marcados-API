@@ -1,14 +1,15 @@
 import { FiltrarIntegrantes } from "../functions/filtrar_integrantes";
+import { filtrarNaipe } from "../functions/filtrar_naipe_escala";
 
-function filtrarNaipe(naipe: string[]):string[] {
-    let pessoa1 = Math.floor(Math.random() * naipe.length)
-    let pessoa2 = Math.floor(Math.random() * naipe.length)
+// function filtrarNaipe(naipe: string[]):string[] {
+//     let pessoa1 = Math.floor(Math.random() * naipe.length)
+//     let pessoa2 = Math.floor(Math.random() * naipe.length)
     
-    if(pessoa2 === pessoa1) {
-        pessoa2 = Math.floor(Math.random() * naipe.length)
-    }
-    return [naipe[pessoa1], naipe[pessoa2]]
-}
+//     if(pessoa2 === pessoa1) {
+//         pessoa2 = Math.floor(Math.random() * naipe.length)
+//     }
+//     return [naipe[pessoa1], naipe[pessoa2]]
+// }
 
 
 class EscalasServices {
@@ -18,18 +19,23 @@ class EscalasServices {
             const contralto = await FiltrarIntegrantes("Contralto")
             const tenor = await FiltrarIntegrantes("Tenor")
 
+            const teclado = await FiltrarIntegrantes("Teclado")
+            const violao = await FiltrarIntegrantes("Violão")
+            const guitar = await FiltrarIntegrantes("Guitarra")
+            const baixo = await FiltrarIntegrantes("Baixo")
+            const bateria = await FiltrarIntegrantes("Bateria")
+
             if (soprano && contralto && tenor) {
 
                 const dados = {
-                    sopranos: [
-                        filtrarNaipe(soprano)
-                    ],
-                    contraltos: [
-                        filtrarNaipe(contralto)
-                    ],
-                    tenores: [
-                        filtrarNaipe(tenor)
-                    ]
+                    sopranos: [ filtrarNaipe(soprano) ],
+                    contraltos: [ filtrarNaipe(contralto) ],
+                    tenores: [ filtrarNaipe(tenor) ],
+                    tecladistas: [ filtrarNaipe(teclado) ],
+                    violao: violao[Math.floor(Math.random() * violao.length)],
+                    guitarrista: guitar[Math.floor(Math.random() * guitar.length)],
+                    baixista: baixo[Math.floor(Math.random() * baixo.length)],
+                    baterista: bateria[Math.floor(Math.random() * bateria.length)]
                 }
 
                 return dados

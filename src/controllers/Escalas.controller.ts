@@ -5,11 +5,11 @@ const services = new EscalasServices()
 
 class Escalas {
     async CriarEscalas(req: Request, res: Response) {
-        const { confirmacao } = req.body
-        if(confirmacao === "") {
+        const { id } = req.body
+        if(id === "") {
             res.json({erro: "Erro"})
         }
-        const gerar = await services.CriarEscala()
+        const gerar = await services.CriarEscala(id)
         res.json(gerar)
     }
 

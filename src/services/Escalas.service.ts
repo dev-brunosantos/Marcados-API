@@ -5,7 +5,7 @@ import { FormataData } from "../functions/formata_data";
 const { escalas } = prismaConfig;
 
 class EscalasServices {
-    async CriarEscala() {
+    async CriarEscala(id: string) {
         try {
             let dados = await criarEscala()
             const {
@@ -16,6 +16,7 @@ class EscalasServices {
             if (dados) {
                 return await escalas.create({
                     data: {
+                        id,
                         ministro: ministro,
                         soprano: sopranos,
                         contralto: contraltos,
@@ -48,15 +49,16 @@ class EscalasServices {
                     violao: true,
                     guitarra: true,
                     baixo: true,
-                    bateria: true
+                    bateria: true,
+                    dt_culto: true
                 }
             })
 
             var escalaGeral: any[] = []
 
             if (escalasExistentes) {
-
                 escalasExistentes.forEach(escala => {
+                    var dataFormatada = FormataData(escala.dt_culto)
                     var dados = {
                         id: escala.id,
                         ministro: escala.ministro,
@@ -71,7 +73,8 @@ class EscalasServices {
                         violao: escala.violao,
                         guitarra: escala.guitarra,
                         baixo: escala.baixo,
-                        baterista: escala.bateria 
+                        baterista: escala.bateria,
+                        dia: dataFormatada
                     }
                     escalaGeral.push(dados)
                 })

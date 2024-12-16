@@ -17,6 +17,12 @@ class Escalas {
         const escalas = await services.ListarEscalas()
         res.json(escalas)
     }
+
+    async BuscarCulto(req: Request, res: Response) {
+        const { id } = req.body;
+        const culto = await services.ListarCulto(id)
+        res.json(culto)
+    }
 }
 
 const EscalasController = new Escalas()

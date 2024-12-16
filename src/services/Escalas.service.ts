@@ -90,6 +90,59 @@ class EscalasServices {
         }
     }
 
+    async ListarCulto(id: string) {
+        try {
+            const cultoExistente = await escalas.findFirst({
+                where: { id: { equals: id, mode: 'insensitive' } },
+                select: {
+                    id: true,
+                    ministro: true,
+                    soprano: true,
+                    contralto: true,
+                    tenor: true,
+                    teclado: true,
+                    violao: true,
+                    guitarra: true,
+                    baixo: true,
+                    bateria: true,
+                    dt_culto: true
+                }
+            })
+
+            if (cultoExistente) {
+                const {
+                    id, ministro, soprano, contralto, tenor, teclado,
+                    violao, guitarra, baixo, bateria, dt_culto
+                } = cultoExistente
+
+                var dataFormatada = FormataData(dt_culto)
+
+                var culto = {
+                    id: id,
+                    ministro: ministro,
+                    soprano_1: soprano[0],
+                    soprano_2: soprano[1],
+                    contralto_1: contralto[0],
+                    contralto_2: contralto[1],
+                    tenor_1: tenor[0],
+                    tenor_2: tenor[1],
+                    teclado_1: teclado[0],
+                    teclado_2: teclado[1],
+                    violao: violao,
+                    guitarra: guitarra,
+                    baixo: baixo,
+                    baterista: bateria,
+                    dia: dataFormatada
+                }
+                return culto
+            }
+            return "Não existe o culto informado."
+        } catch (error) {
+            console.log(error)
+            return "Erro interno"
+        }
+    }
+
 }
 
 export { EscalasServices }

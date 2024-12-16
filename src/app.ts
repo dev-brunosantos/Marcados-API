@@ -15,5 +15,6 @@ app.use(routes.UsuarioRotas)
 
 app.post('/escalas', EscalasController.CriarEscalas)
 app.get('/escalas', EscalasController.ListarEscalas)
+app.get('/escalas/culto', EscalasController.BuscarCulto)
 
 export { app }

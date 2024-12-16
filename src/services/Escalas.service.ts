@@ -1,27 +1,28 @@
 import { prismaConfig } from "../config/prismaConfig";
 import { FiltrarIntegrantes } from "../functions/filtrar_integrantes";
 
-function filtrarNaipe(naipe: number) {
-    let dado = Math.floor(Math.random() * naipe)
-    return dado
-}
-
 // function filtrarNaipe(naipe: number) {
-
-//     var pessoa1 = Math.floor(Math.random() * naipe)
-//     var pessoa2 = Math.floor(Math.random() * naipe)
-
-//     if(pessoa2 === pessoa1) {
-//         if(pessoa2 === 0) {
-//             pessoa2 = Math.floor(Math.random() * naipe) +1
-//         } 
-//         else {
-//             pessoa2 = Math.floor(Math.random() * naipe) -1
-//         }
-//     }
-
-//     return [pessoa1, pessoa2]
+//     let dado = Math.floor(Math.random() * naipe)
+//     return dado
 // }
+
+function filtrarNaipe(naipe: string[]):string[] {
+    let pessoa1 = Math.floor(Math.random() * naipe.length)
+    let pessoa2 = Math.floor(Math.random() * naipe.length)
+    
+    if(pessoa2 === pessoa1) {
+        pessoa2 = Math.floor(Math.random() * naipe.length)
+        // if(pessoa1 == 0) {
+        //     pessoa2 = Math.floor(Math.random() * naipe.length) + 1
+        //     return [naipe[pessoa1], naipe[pessoa2]]
+        // }
+        // else {
+        //     pessoa2 = Math.floor(Math.random() * naipe.length) - 1
+        //     return [naipe[pessoa1], naipe[pessoa2]]
+        // }
+    }
+    return [naipe[pessoa1], naipe[pessoa2]]
+}
 
 
 class EscalasServices {
@@ -31,22 +32,23 @@ class EscalasServices {
             const contralto = await FiltrarIntegrantes("Contralto")
             const tenor = await FiltrarIntegrantes("Tenor")
 
-            if (soprano || contralto || tenor) {
-
+            if (soprano && contralto && tenor) {
 
                 const dados = {
                     sopranos: [
-                        // soprano[soprano[s1], soprano[s2]],
-                        soprano[filtrarNaipe(soprano.length)],
-                        soprano[filtrarNaipe(soprano.length)]
+                        filtrarNaipe(soprano)
+                        // soprano[filtrarNaipe()],
+                        // soprano[filtrarNaipe(soprano)]
                     ],
                     contraltos: [
-                        contralto[filtrarNaipe(contralto.length)],
-                        contralto[filtrarNaipe(contralto.length)]
+                        filtrarNaipe(contralto)
+                        // contralto[filtrarNaipe(contralto)],
+                        // contralto[filtrarNaipe(contralto)]
                     ],
                     tenores: [
-                        tenor[filtrarNaipe(tenor.length)],
-                        tenor[filtrarNaipe(tenor.length)]
+                        filtrarNaipe(tenor)
+                        // tenor[filtrarNaipe(tenor)],
+                        // tenor[filtrarNaipe(tenor)]
                     ]
                 }
 

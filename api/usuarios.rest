@@ -3,19 +3,19 @@ POST http://localhost:9000/usuarios
 Content-Type: application/json
 
 {
-    "nome": "Paulo",
-    "sobrenome": "Nascimento",
-    "email": "pnascimento@email.com",
-    "senha": "1234",
-    "cargo": "Musico",
-    "naipe": "Baixo"
+    "nome": "Roberto",
+        "sobrenome": "Martins",
+        "email": "rmartins@email.com",
+        "senha": "7766",
+        "cargo": "Vocal",
+        "naipe": "Violão"
 }
 
 ### GET
 GET http://localhost:9000/usuarios
 
 ### GET 
-GET http://localhost:9000/usuarios/usuario_id?id=2604a86b-84f7-4010-b843-f1abeb6d60ca
+GET http://localhost:9000/usuarios/usuario_id?id=b7f085c3-b7ee-4a13-9597-4e36c808b45f
 
 
 ### POST
@@ -27,14 +27,14 @@ Content-Type: application/json
 }
 
 ### PATCH 
-PATCH  http://localhost:9000/usuarios/editar/368cfb71-67f5-4348-8831-11a62979d620
+PATCH  http://localhost:9000/usuarios/editar/d6ab7a50-26f1-41f6-bd15-e49efd2c2fd2
 Content-Type: application/json
 
 {
     "nome": "",
-    "sobrenome": "Alves",
+    "sobrenome": "",
     "cargo": "Vocal",
-    "naipe": "Soprano"
+    "naipe": "Tenor"
 }
 
 ### DELETE

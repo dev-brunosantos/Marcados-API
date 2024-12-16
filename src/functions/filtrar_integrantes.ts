@@ -20,3 +20,22 @@ export async function FiltrarIntegrantes(naipe: string) {
     const pessoas = integrante.map(pes => `${pes.nome} ${pes.sobrenome}`);
     return pessoas;
 }
+
+export async function FiltrarMinistros(cargo: string) {
+    const integrante = await usuarios.findMany({
+        where: { 
+            cargo: { cargo: {
+                equals: cargo, mode: 'insensitive'
+            } }
+        },
+        select: {
+            nome: true,
+            sobrenome: true,
+            cargo: true
+        }
+    })
+
+    // const pessoas = integrante.map(pes => pes.nome);
+    const pessoas = integrante.map(pes => `${pes.nome} ${pes.sobrenome}`);
+    return pessoas;
+}

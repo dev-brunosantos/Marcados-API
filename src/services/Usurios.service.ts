@@ -40,6 +40,7 @@ class UsuarioServices {
 
                 return `Usuario ${novoUsuario.nome.toUpperCase()} foi cadastrado com sucesso.`
             }
+            return "O e-mail informado já esta vinculado ao cadastro de um usuário."
         } catch (error) {
             return "Erro interno! Por favor, tente novamente."
         }

@@ -1,0 +1,18 @@
+### POST
+POST http://localhost:9000/escalas
+Content-Type: application/json
+
+{
+    "id": "Culto de Jovens"
+}
+
+### GET
+GET http://localhost:9000/escalas
+
+### GET
+GET http://localhost:9000/escalas/culto 
+Content-Type: application/json
+
+{
+    "id": "Culto de ceia"
+}

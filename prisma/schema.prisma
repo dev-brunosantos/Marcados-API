@@ -43,3 +43,18 @@ model Usuarios {
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @default(now()) 
 }
+
+model Escalas {
+  id String @id @unique 
+  // id Int @id @default(autoincrement())
+  ministro String
+  soprano String[]
+  contralto String[]
+  tenor String[]
+  teclado String[]
+  violao String
+  guitarra String
+  baixo String
+  bateria String
+  dt_culto DateTime @default(now())
+}

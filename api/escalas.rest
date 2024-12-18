@@ -3,7 +3,7 @@ POST http://localhost:9000/escalas
 Content-Type: application/json
 
 {
-    "id": "Culto de Jovens"
+    "titulo": "Culto de Jovens"
 }
 
 ### GET
@@ -14,7 +14,7 @@ GET http://localhost:9000/escalas/culto
 Content-Type: application/json
 
 {
-    "id": "Culto de jovens"
+    "titulo": "culto de jovens"
 }
 
 ### GET
@@ -22,7 +22,7 @@ GET http://localhost:9000/teste
 Content-Type: application/json
 
 {
-    "id": "Culto de jovens",
+    "titulo": "Culto de deia",
     "posicao": 2
 }
 
@@ -31,6 +31,14 @@ PATCH  http://localhost:9000/escalas
 Content-Type: application/json
 
 {
-    "id": "Culto de ceia",
-    "culto": "17/12/2024" 
+    "titulo": "Culto de Jovens",
+    "culto": "21/12/2024" 
+}
+
+### DELETE
+DELETE  http://localhost:9000/escalas
+Content-Type: application/json
+
+{
+    "titulo": "Culto de Jovens"
 }

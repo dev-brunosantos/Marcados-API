@@ -29,12 +29,15 @@ app.get('/teste', async (req: Request, res: Response) => {
         })
 
         if (buscarTeste) {
-            return res.json(buscarTeste.teclado[Number(posicao)-1])
+            return res.json(buscarTeste.teclado[Number(posicao) - 1])
         }
         return res.json({ erro: "Não encontramos a escala informada." })
     } catch (error) {
         return res.json({ erro: error })
     }
 })
+
 app.patch('/escalas', EscalasController.EditarEscala)
+app.delete('/escalas', EscalasController.ApagarEscala)
+
 export { app }

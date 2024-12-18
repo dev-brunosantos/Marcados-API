@@ -29,6 +29,12 @@ class Escalas {
         const editar = await services.EditarEscala(id, culto)
         res.json(editar)
     }
+
+    async ApagarEscala(req: Request, res: Response) {
+        const { id } = req.body 
+        const escala = await services.ApagarEscala(id)
+        res.json(escala)
+    }
 }
 
 const EscalasController = new Escalas()

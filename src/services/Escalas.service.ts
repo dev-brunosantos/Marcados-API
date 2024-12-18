@@ -5,7 +5,7 @@ import { FormataData } from "../functions/formata_data";
 const { escalas } = prismaConfig;
 
 class EscalasServices {
-    async CriarEscala(id: string) {
+    async CriarEscala(titulo: string) {
         try {
             let dados = await criarEscala()
             const {
@@ -16,7 +16,7 @@ class EscalasServices {
             if (dados) {
                 return await escalas.create({
                     data: {
-                        id,
+                        titulo,
                         ministro: ministro,
                         soprano: sopranos,
                         contralto: contraltos,
@@ -40,7 +40,7 @@ class EscalasServices {
         try {
             const escalasExistentes = await escalas.findMany({
                 select: {
-                    id: true,
+                    titulo: true,
                     ministro: true,
                     soprano: true,
                     contralto: true,
@@ -60,7 +60,7 @@ class EscalasServices {
                 escalasExistentes.forEach(escala => {
                     var dataFormatada = FormataData(escala.dt_culto)
                     var dados = {
-                        id: escala.id,
+                        titulo: escala.titulo,
                         ministro: escala.ministro,
                         soprano_1: escala.soprano[0],
                         soprano_2: escala.soprano[1],
@@ -90,12 +90,12 @@ class EscalasServices {
         }
     }
 
-    async ListarCulto(id: string) {
+    async ListarCulto(titulo: string) {
         try {
             const cultoExistente = await escalas.findFirst({
-                where: { id: { equals: id, mode: 'insensitive' } },
+                where: { titulo: { equals: titulo, mode: 'insensitive' } },
                 select: {
-                    id: true,
+                    titulo: true,
                     ministro: true,
                     soprano: true,
                     contralto: true,
@@ -111,14 +111,14 @@ class EscalasServices {
 
             if (cultoExistente) {
                 const {
-                    id, ministro, soprano, contralto, tenor, teclado,
+                    titulo, ministro, soprano, contralto, tenor, teclado,
                     violao, guitarra, baixo, bateria, dt_culto
                 } = cultoExistente
 
                 var dataFormatada = FormataData(dt_culto)
 
                 var culto = {
-                    id: id,
+                    titulo: titulo,
                     ministro: ministro,
                     soprano_1: soprano[0],
                     soprano_2: soprano[1],
@@ -143,20 +143,22 @@ class EscalasServices {
         }
     }
 
-    // async EditarEscala(id: string, posicao: number) {
     async EditarEscala(id: string, culto: string) {
         try {
+            const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+            const match = culto.match(regex);
 
-            // var culto = "17/12/2024"
+            if (!match) {
+                return { erro: "Data informada no formato inváltituloo. Use dd/MM/yyyy." };
+            }
 
-            var dataAlterada = culto.split("/")
-            // var dataFormatada = `${dataAlterada[2]}-${dataAlterada[1]}-${dataAlterada[0]} 00:00:00.000`
-            // var dataFormatada = new Date(`${dataAlterada[2]}-${dataAlterada[1]}-${dataAlterada[0]}T00:00:00.000Z`).toISOString();
-            var dataFormatada = new Date(`${dataAlterada[2]}-${dataAlterada[1]}-${dataAlterada[0]} 00:00:00.000`).toISOString();
+            const [_, dia, mes, ano] = match;
 
-            const buscarTeste = await escalas.findFirst({
-                where: { id: { equals: id, mode: 'insensitive' } }
-            })
+            const dataFormatada = new Date(`${ano}-${mes}-${dia}T00:00:00.000Z`).toISOString();
+
+            const buscarTeste = await escalas.findMany({
+                where: { id }
+            });
 
             if (buscarTeste) {
                 const edicao = await escalas.update({
@@ -164,16 +166,38 @@ class EscalasServices {
                     data: {
                         dt_culto: dataFormatada
                     }
-                })
+                });
 
-                return edicao
+                return edicao;
             }
-            return "Não encontramos a escala informada."
+
+            return "Não encontramos a escala informada.";
         } catch (error) {
-            return { erro: error }
+            return { erro: error || "Erro desconhectituloo." };
         }
     }
 
+    async ApagarEscala(id: string) {
+        try {
+            const tituloEscalaExistente = await escalas.findFirst({ 
+                where: { id } 
+            })
+
+            if(tituloEscalaExistente) {
+
+                const dataFormatada = FormataData(tituloEscalaExistente.dt_culto)
+
+                await escalas.delete({where: { id } })
+                return `Escala do dia ${dataFormatada} foi escluída com sucesso.`
+            }
+
+            return "Não foi encontrado nenhuma escala com esse titulo"
+
+        } catch (error) {
+            console.log(error)
+            return "Erro interno"
+        }
+    }
 }
 
 export { EscalasServices }

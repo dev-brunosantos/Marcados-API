@@ -45,7 +45,8 @@ model Usuarios {
 }
 
 model Escalas {
-  id String @id @unique 
+  id String @id @default(uuid())
+  titulo String
   // id Int @id @default(autoincrement())
   ministro String
   soprano String[]

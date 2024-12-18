@@ -143,6 +143,37 @@ class EscalasServices {
         }
     }
 
+    // async EditarEscala(id: string, posicao: number) {
+    async EditarEscala(id: string, culto: string) {
+        try {
+
+            // var culto = "17/12/2024"
+
+            var dataAlterada = culto.split("/")
+            // var dataFormatada = `${dataAlterada[2]}-${dataAlterada[1]}-${dataAlterada[0]} 00:00:00.000`
+            // var dataFormatada = new Date(`${dataAlterada[2]}-${dataAlterada[1]}-${dataAlterada[0]}T00:00:00.000Z`).toISOString();
+            var dataFormatada = new Date(`${dataAlterada[2]}-${dataAlterada[1]}-${dataAlterada[0]} 00:00:00.000`).toISOString();
+
+            const buscarTeste = await escalas.findFirst({
+                where: { id: { equals: id, mode: 'insensitive' } }
+            })
+
+            if (buscarTeste) {
+                const edicao = await escalas.update({
+                    where: { id },
+                    data: {
+                        dt_culto: dataFormatada
+                    }
+                })
+
+                return edicao
+            }
+            return "Não encontramos a escala informada."
+        } catch (error) {
+            return { erro: error }
+        }
+    }
+
 }
 
 export { EscalasServices }

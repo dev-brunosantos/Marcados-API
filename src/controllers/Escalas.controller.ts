@@ -23,6 +23,8 @@ class Escalas {
         const culto = await services.ListarCulto(id)
         res.json(culto)
     }
+
+    
 }
 
 const EscalasController = new Escalas()

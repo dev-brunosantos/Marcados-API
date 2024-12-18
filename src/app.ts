@@ -37,7 +37,7 @@ app.get('/teste', async (req: Request, res: Response) => {
     }
 })
 
-app.patch('/escalas', EscalasController.EditarEscala)
-app.delete('/escalas', EscalasController.ApagarEscala)
+app.patch('/escalas/:id', EscalasController.EditarEscala)
+app.delete('/escalas/:id', EscalasController.ApagarEscala)
 
 export { app }

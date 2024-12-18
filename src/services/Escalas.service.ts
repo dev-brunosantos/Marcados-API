@@ -40,6 +40,7 @@ class EscalasServices {
         try {
             const escalasExistentes = await escalas.findMany({
                 select: {
+                    id: true,
                     titulo: true,
                     ministro: true,
                     soprano: true,
@@ -60,6 +61,7 @@ class EscalasServices {
                 escalasExistentes.forEach(escala => {
                     var dataFormatada = FormataData(escala.dt_culto)
                     var dados = {
+                        id: escala.id,
                         titulo: escala.titulo,
                         ministro: escala.ministro,
                         soprano_1: escala.soprano[0],
@@ -95,6 +97,7 @@ class EscalasServices {
             const cultoExistente = await escalas.findFirst({
                 where: { titulo: { equals: titulo, mode: 'insensitive' } },
                 select: {
+                    id: true,
                     titulo: true,
                     ministro: true,
                     soprano: true,
@@ -111,13 +114,14 @@ class EscalasServices {
 
             if (cultoExistente) {
                 const {
-                    titulo, ministro, soprano, contralto, tenor, teclado,
-                    violao, guitarra, baixo, bateria, dt_culto
+                    id, titulo, ministro, soprano, contralto, tenor, 
+                    teclado, violao, guitarra, baixo, bateria, dt_culto
                 } = cultoExistente
 
                 var dataFormatada = FormataData(dt_culto)
 
                 var culto = {
+                    id: id,
                     titulo: titulo,
                     ministro: ministro,
                     soprano_1: soprano[0],

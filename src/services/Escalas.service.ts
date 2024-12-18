@@ -82,11 +82,11 @@ class EscalasServices {
                 return escalaGeral
             }
 
-            return { error: "Erro ao tentar consultar os dados das escalas" }  // Melhor retornar um objeto de erro
+            return { error: "Erro ao tentar consultar os dados das escalas" }
 
         } catch (error) {
-            console.error(error)  // Logando o erro real para depuração
-            return { error: "Erro interno!" }  // Retornando um objeto de erro
+            console.error(error)
+            return { error: "Erro interno!" }
         }
     }
 

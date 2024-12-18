@@ -5,11 +5,11 @@ const services = new EscalasServices()
 
 class Escalas {
     async CriarEscalas(req: Request, res: Response) {
-        const { id } = req.body
-        if(id === "") {
+        const { titulo } = req.body
+        if(titulo === "") {
             res.json({erro: "Erro"})
         }
-        const gerar = await services.CriarEscala(id)
+        const gerar = await services.CriarEscala(titulo)
         res.json(gerar)
     }
 
@@ -19,19 +19,23 @@ class Escalas {
     }
 
     async BuscarCulto(req: Request, res: Response) {
-        const { id } = req.body;
-        const culto = await services.ListarCulto(id)
+        const { titulo } = req.body;
+        const culto = await services.ListarCulto(titulo)
         res.json(culto)
     }
 
     async EditarEscala(req: Request, res: Response) {
-        const { id, culto } = req.body
+        const { id } = req.query
+        if(typeof id !== "string") {
+            throw new Error("Id informado no formato incorreto")
+        }
+        const { culto } = req.body
         const editar = await services.EditarEscala(id, culto)
         res.json(editar)
     }
 
     async ApagarEscala(req: Request, res: Response) {
-        const { id } = req.body 
+        const { id } = req.params 
         const escala = await services.ApagarEscala(id)
         res.json(escala)
     }

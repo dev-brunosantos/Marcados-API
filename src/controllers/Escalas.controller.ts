@@ -25,10 +25,7 @@ class Escalas {
     }
 
     async EditarEscala(req: Request, res: Response) {
-        const { id } = req.query
-        if(typeof id !== "string") {
-            throw new Error("Id informado no formato incorreto")
-        }
+        const { id } = req.params
         const { culto } = req.body
         const editar = await services.EditarEscala(id, culto)
         res.json(editar)

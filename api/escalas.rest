@@ -14,5 +14,23 @@ GET http://localhost:9000/escalas/culto
 Content-Type: application/json
 
 {
-    "id": "Culto de ceia"
+    "id": "Culto de jovens"
+}
+
+### GET
+GET http://localhost:9000/teste 
+Content-Type: application/json
+
+{
+    "id": "Culto de jovens",
+    "posicao": 2
+}
+
+### PATCH
+PATCH  http://localhost:9000/escalas
+Content-Type: application/json
+
+{
+    "id": "Culto de ceia",
+    "culto": "17/12/2024" 
 }
